@@ -1,13 +1,15 @@
-import { db } from 'db'
+import { DataTable } from '@/components/data-table'
+import { SiteHeader } from '@/components/site-header'
+import { db } from '@/db'
+import { groups, products } from '@/schema'
 import { desc, eq } from 'drizzle-orm'
-import Link from 'next/link'
-import { groups, products } from 'schema'
 
 export default async function Page() {
   const groupItems = db
     .select({
       id: groups.id,
       name: groups.name,
+      publishDate: groups.publishDate,
       productsCount: db.$count(products, eq(products.groupId, groups.id)),
     })
     .from(groups)
@@ -15,14 +17,15 @@ export default async function Page() {
     .all()
 
   return (
-    <div className="flex flex-col gap-6 max-w-7xl mx-auto">
-      {groupItems.map((group) => (
-        <div className="flex flex-col gap-4" key={group.id}>
-          <Link href={`/group/${group.id}`}>
-            {group.name} ({group.productsCount})
-          </Link>
+    <>
+      <SiteHeader title="Groups" />
+      <div className="flex flex-1 flex-col">
+        <div className="@container/main flex flex-1 flex-col gap-2">
+          <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+            <DataTable data={groupItems} />
+          </div>
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   )
 }

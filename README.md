@@ -6,6 +6,5 @@ A simple showcase app extracted from my private repo.
 
 ```
 $ bun install
-$ mkdir data
 $ bun dev
 ```
