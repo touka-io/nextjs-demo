@@ -244,7 +244,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
         <Label htmlFor="view-selector" className="sr-only">
           View
         </Label>
-        <Select defaultValue="outline">
+        <Select defaultValue="outline" disabled>
           <SelectTrigger className="flex w-fit @4xl/main:hidden" size="sm" id="view-selector">
             <SelectValue placeholder="Select a view" />
           </SelectTrigger>
@@ -258,12 +258,14 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
         <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
           <TabsTrigger value="outline">Outline</TabsTrigger>
           <TabsTrigger value="past-performance">
-            Past Performance <Badge variant="secondary">3</Badge>
+            Past Performance <Badge variant="secondary">0</Badge>
           </TabsTrigger>
-          <TabsTrigger value="key-personnel">
+          <TabsTrigger value="key-personnel" disabled>
             Key Personnel <Badge variant="secondary">2</Badge>
           </TabsTrigger>
-          <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger>
+          <TabsTrigger value="focus-documents" disabled>
+            Focus Documents
+          </TabsTrigger>
         </TabsList>
         <div className="flex items-center gap-2">
           <DropdownMenu>
@@ -293,7 +295,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" disabled>
             <IconPlus />
             <span className="hidden lg:inline">Add Section</span>
           </Button>
